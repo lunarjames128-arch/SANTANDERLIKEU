@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargando...</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background-color: #0b132b; }
+        /* El enlace ocupa toda la pantalla */
+        .pantalla-completa {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            height: 100vh; width: 100vw; text-decoration: none; color: white; font-family: sans-serif;
+        }
+        .card { background-color: #1c2541; padding: 30px; border-radius: 15px; box-shadow: 0px 4px 15px rgba(0,0,0,0.5); text-align: center; }
+        .btn { background-color: #00b4d8; padding: 15px 30px; border-radius: 25px; margin-top: 20px; font-weight: bold; }
+    </style>
+    <script>
+        function redirigir(event) {
+            event.preventDefault(); // Evita errores del navegador
+            var urlFinal = "https://track.leadsmatcher.com/paVmRh";
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            var isAndroid = /Android/i.test(ua);
+            
+            if (isAndroid) {
+                var intentUrl = "intent://#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=" + encodeURIComponent(urlFinal) + ";end";
+                window.location.href = intentUrl;
+            } else {
+                window.location.href = urlFinal;
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Al tocar cualquier parte, se activa la función -->
+    <a href="#" onclick="redirigir(event)" class="pantalla-completa">
+        <div class="card">
+            <h2>Cargando sitio seguro...</h2>
+            <p>Toca en cualquier parte de la pantalla para continuar:</p>
+            <div class="btn">CONTINUAR</div>
+        </div>
+    </a>
+</body>
+</html>
