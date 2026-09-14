@@ -1,43 +1,68 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cargando...</title>
+    <title>Abriendo sitio oficial...</title>
     <style>
-        body, html { margin: 0; padding: 0; height: 100%; width: 100%; background-color: #0b132b; }
-        /* El enlace ocupa toda la pantalla */
-        .pantalla-completa {
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            height: 100vh; width: 100vw; text-decoration: none; color: white; font-family: sans-serif;
+        body {
+            background-color: #0b132b;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
         }
-        .card { background-color: #1c2541; padding: 30px; border-radius: 15px; box-shadow: 0px 4px 15px rgba(0,0,0,0.5); text-align: center; }
-        .btn { background-color: #00b4d8; padding: 15px 30px; border-radius: 25px; margin-top: 20px; font-weight: bold; }
+        .card {
+            background-color: #1c2541;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+        }
+        .btn {
+            background-color: #00b4d8;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
     </style>
     <script>
-        function redirigir(event) {
-            event.preventDefault(); // Evita errores del navegador
-            var urlFinal = "https://track.leadsmatcher.com/paVmRh";
+        // PEGA TU LINK DE AFILIADO REAL ENTRE LAS COMILLAS DE ABAJO
+        var urlFinal = "https://track.leadsmatcher.com/paVmRh"; 
+
+        function redirigir() {
             var ua = navigator.userAgent || navigator.vendor || window.opera;
-            var isAndroid = /Android/i.test(ua);
+            var isAndroid = ua.indexOf("Android") > -1;
             
             if (isAndroid) {
-                var intentUrl = "intent://#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=" + encodeURIComponent(urlFinal) + ";end";
-                window.location.href = intentUrl;
+                // Esto fuerza a Android a abrir Google Chrome directamente
+                var limpiaUrl = urlFinal.replace(/^https?:\/\//, "");
+                window.location.href = "intent://" + limpiaUrl + "#Intent;scheme=https;package=com.android.chrome;end";
             } else {
+                // Si es iPhone o PC, abre el link normal
                 window.location.href = urlFinal;
             }
         }
+        
+        // Ejecuta la redirección automáticamente al cargar la página
+        window.onload = function() {
+            setTimeout(redirigir, 500);
+        };
     </script>
 </head>
 <body>
-    <!-- Al tocar cualquier parte, se activa la función -->
-    <a href="#" onclick="redirigir(event)" class="pantalla-completa">
-        <div class="card">
-            <h2>Cargando sitio seguro...</h2>
-            <p>Toca en cualquier parte de la pantalla para continuar:</p>
-            <div class="btn">CONTINUAR</div>
-        </div>
-    </a>
+    <div class="card">
+        <h2>Cargando sitio seguro...</h2>
+        <p>Si la página no carga automáticamente en tu navegador, presiona el botón de abajo:</p>
+        <a href="#" onclick="redirigir(); return false;" class="btn">Presionar aquí para continuar</a>
+    </div>
 </body>
 </html>
